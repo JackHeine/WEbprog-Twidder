@@ -199,10 +199,10 @@ def get_edit(id=None):
     # open the quote collection
     temp_quotes_collection = quotes_db.quotes_collection
     # find a specific quote
-    my_quote = list(temp_quotes_collection.find({"_id" : ObjectId(id)}))
-    my_quote = my_quote[0]
+    quote_owner = list(temp_quotes_collection.find({"_id" : ObjectId(id)}))
+    quote_owner = quote_owner[0]
 
-    if id and my_quote["owner"] == user:
+    if id and quote_owner["owner"] == user:
         # open the quotes collection
         quotes_collection = quotes_db.quotes_collection
         # get the item
@@ -251,10 +251,10 @@ def get_delete(id=None):
     # open the quote collection
     temp_quotes_collection = quotes_db.quotes_collection
     # find a specific quote
-    my_quote = list(temp_quotes_collection.find({"_id" : ObjectId(id)}))
-    my_quote = my_quote[0]
+    quote_owner = list(temp_quotes_collection.find({"_id" : ObjectId(id)}))
+    quote_owner = quote_owner[0]
 
-    if id and my_quote["owner"] == user:
+    if id and quote_owner["owner"] == user:
         # open the quotes collection
         quotes_collection = quotes_db.quotes_collection
         # delete the item
