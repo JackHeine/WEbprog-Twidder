@@ -187,7 +187,22 @@ def get_edit(id=None):
     if not session_id:
         response = redirect("/login")
         return response
-    if id:
+    
+    # open the session collection
+    session_collection = session_db.session_collection
+    # get the data for this session
+    session_data = list(session_collection.find({"session_id": session_id}))
+    session_data = session_data[0]
+    # get some information from the session
+    user = session_data.get("user", "unknown user")
+
+    # open the quote collection
+    temp_quotes_collection = quotes_db.quotes_collection
+    # find a specific quote
+    my_quote = list(temp_quotes_collection.find({"_id" : ObjectId(id)}))
+    my_quote = my_quote[0]
+
+    if id and my_quote["owner"] == user:
         # open the quotes collection
         quotes_collection = quotes_db.quotes_collection
         # get the item
@@ -224,7 +239,22 @@ def get_delete(id=None):
     if not session_id:
         response = redirect("/login")
         return response
-    if id:
+    
+    # open the session collection
+    session_collection = session_db.session_collection
+    # get the data for this session
+    session_data = list(session_collection.find({"session_id": session_id}))
+    session_data = session_data[0]
+    # get some information from the session
+    user = session_data.get("user", "unknown user")
+
+    # open the quote collection
+    temp_quotes_collection = quotes_db.quotes_collection
+    # find a specific quote
+    my_quote = list(temp_quotes_collection.find({"_id" : ObjectId(id)}))
+    my_quote = my_quote[0]
+
+    if id and my_quote["owner"] == user:
         # open the quotes collection
         quotes_collection = quotes_db.quotes_collection
         # delete the item
