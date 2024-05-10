@@ -5,7 +5,7 @@
     </head>
     <body>
         <h1>Edit this quote...</h1>
-        <form action="/edit" method="POST">
+        <form action="/reply" method="POST">
             <input type="hidden" id="_id" name="_id" value="{{data["_id"]}}" />
             <table>
                 <tr>
@@ -25,6 +25,7 @@
                         value="{{data["author"]}}"/>        
                     </td>
                 </tr>
+                
                 <tr>
                     <td>
                         <label for="public">Public?</label>
