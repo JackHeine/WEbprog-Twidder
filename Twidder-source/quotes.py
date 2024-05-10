@@ -261,3 +261,18 @@ def get_delete(id=None):
         quotes_collection.delete_one({"_id": ObjectId(id)})
     # return to the quotes page
     return redirect("/quotes")
+
+@app.route("/search", methods=["POST"])
+def get_search():
+    session_id = request.cookies.get("session_id", None)
+    if not session_id:
+        response = redirect("/login")
+        return response
+
+    query = request.form.get("query")
+
+    quotes_collection = quotes_db.quotes_collection
+
+    data = quotes_collection.find({"text": {"$eq": query}})
+
+    return render_template("search.html", data=data)
